@@ -1,0 +1,88 @@
+<html>
+<meta charset="utf-8">
+<title>Console Artist</title>
+<style>
+body {
+	padding: 20px;
+	background-color: #eee;
+	color: rgba(0, 0, 0, 0.72);
+	text-shadow: 0px 1px 2px #ccc;
+	font-size: 16px;
+	font-family: Meiryo, Verdana;
+}
+
+.heading {
+	font-size: 50px;
+	margin: 0;
+}
+
+.image-file-input {
+	display: block;
+	min-width: 440px;
+	margin-top: 8px;
+	padding: 18px;
+	cursor: pointer;
+	border: 1px solid #999;
+	border-radius: 10px;
+	box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 0px 0px;
+	background-color: #fff;
+	background: linear-gradient(#fff 0%,#fff 95%,rgba(221,221,221,1) 100%);
+}
+
+.image-file-input:hover {
+	border: 1px solid #333;
+	box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 1px 1px;
+	background-color: #fff;
+	background: linear-gradient(#fff 0%,#fff 95%,#ddd 96%);
+}
+
+.desc-title {
+	display: block;
+	margin-top: 12px;
+	font-weight: bold;
+}
+
+.desc-text {
+	display: block;
+	margin-top: 5px;
+	font-size: 11px;
+	text-shadow: none;
+}
+
+.canvas {
+	margin-top: 8px;
+	background-color: #fff;
+	width: 440px;
+	height: 80px;
+}
+
+.output {
+	display: block;
+	margin-top: 8px;
+	width: 440px;
+	height: 160px;
+	border: 1px solid #999;
+	border-radius: 3px;
+}
+</style>
+
+<h1 class="heading">Console Artist</h1>
+<span class="desc-title">Input image file:</span>
+
+<input type="file" id="file" class="image-file-input">
+
+<span class="desc-text">
+	* Change aspect ratio of your image before load. (Chrome 50 is 3:16)
+</span>
+
+<canvas id="canvas" class="canvas"></canvas>
+
+<textarea id="output" class="output" placeholder="Results"></textarea>
+<span class="desc-text">
+	* Copy &amp; paste the results text to your console for preview.
+</span>
+
+<script src="js/zepto.min.js"></script>
+<script src="js/console-artist.js"></script>
+
+</html>
