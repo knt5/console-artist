@@ -9,3 +9,5 @@ Web browser console art generator
 1. Done!
 
 ![screen shot](screenshot.png)
+
+image: ©2010 Kumamoto pref. Kumamon.
