@@ -1,6 +1,8 @@
 # Console Artist
 
-Web browser console art generator
+Web browser console art generator.
+
+Demo site: https://knt5.github.io/demo/console-artist/
 
 ## Usage
 
