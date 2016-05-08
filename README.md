@@ -8,6 +8,8 @@ Web browser console art generator
 1. Load your image
 1. Done!
 
-![screen shot](screenshot.png)
+![screen shot 1](screenshots/1.png)
 
-image: ©2010 Kumamoto pref. Kumamon.
+![screen shot 2](screenshots/2.png)
+
+![screen shot 3](screenshots/3.png)
