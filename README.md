@@ -4,6 +4,6 @@ Web browser console art generator
 
 ## Usage
 
-* Open console-artist.html
-* Load your image
-* Done!
+1. Open console-artist.html
+1. Load your image
+1. Done!
