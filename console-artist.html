@@ -1,88 +1,121 @@
-<html>
-<meta charset="utf-8">
-<title>Console Artist</title>
-<style>
-body {
-	padding: 20px;
-	background-color: #eee;
-	color: rgba(0, 0, 0, 0.72);
-	text-shadow: 0px 1px 2px #ccc;
-	font-size: 16px;
-	font-family: Meiryo, Verdana;
-}
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=490">
+	<title>Console Artist</title>
+	<style>
+		*, *::before, *::after {
+			box-sizing: border-box;
+		}
 
-.heading {
-	font-size: 50px;
-	margin: 0;
-}
+		body {
+			margin: 0px;
+			padding: 25px;
+			background-color: #eee;
+			color: rgba(0, 0, 0, 0.72);
+			text-shadow: 0px 1px 2px #ccc;
+			font-size: 16px;
+			font-family: Meiryo, Verdana;
+			-webkit-text-size-adjust: 100%;  /* for iOS Safari */
+		}
 
-.image-file-input {
-	display: block;
-	min-width: 440px;
-	margin-top: 8px;
-	padding: 18px;
-	cursor: pointer;
-	border: 1px solid #999;
-	border-radius: 10px;
-	box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 0px 0px;
-	background-color: #fff;
-	background: linear-gradient(#fff 0%,#fff 95%,rgba(221,221,221,1) 100%);
-}
+		a {
+			color: #04f;
+		}
 
-.image-file-input:hover {
-	border: 1px solid #333;
-	box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 1px 1px;
-	background-color: #fff;
-	background: linear-gradient(#fff 0%,#fff 95%,#ddd 96%);
-}
+		a:hover {
+			text-decoration: none;
+		}
 
-.desc-title {
-	display: block;
-	margin-top: 12px;
-	font-weight: bold;
-}
+		.heading {
+			font-size: 50px;
+			margin: 0;
+		}
 
-.desc-text {
-	display: block;
-	margin-top: 5px;
-	font-size: 11px;
-	text-shadow: none;
-}
+		.image-file-input {
+			display: block;
+			min-width: 440px;
+			margin-top: 8px;
+			padding: 18px;
+			cursor: pointer;
+			border: 1px solid #999;
+			border-radius: 10px;
+			box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 0px 0px;
+			background-color: #fff;
+			background: linear-gradient(#fff 0%,#fff 95%,rgba(221,221,221,1) 100%);
+		}
 
-.canvas {
-	margin-top: 8px;
-	background-color: #fff;
-	width: 440px;
-	height: 80px;
-}
+		.image-file-input:hover {
+			border: 1px solid #333;
+			box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 1px 1px;
+			background-color: #fff;
+			background: linear-gradient(#fff 0%,#fff 95%,#ddd 96%);
+		}
 
-.output {
-	display: block;
-	margin-top: 8px;
-	width: 440px;
-	height: 160px;
-	border: 1px solid #999;
-	border-radius: 3px;
-}
-</style>
+		.desc-title {
+			display: block;
+			margin-top: 12px;
+			font-weight: bold;
+		}
 
-<h1 class="heading">Console Artist</h1>
-<span class="desc-title">Input image file:</span>
+		.desc-text {
+			display: block;
+			margin-top: 5px;
+			font-size: 11px;
+			text-shadow: none;
+		}
 
-<input type="file" id="file" class="image-file-input">
+		.canvas {
+			margin-top: 8px;
+			background-color: #fff;
+			width: 440px;
+			height: 80px;
+		}
 
-<span class="desc-text">
-	* Change aspect ratio of your image before load. (Chrome 50 is 3:16)
-</span>
+		.output {
+			display: block;
+			margin-top: 8px;
+			width: 440px;
+			height: 160px;
+			border: 1px solid #999;
+			border-radius: 3px;
+		}
 
-<canvas id="canvas" class="canvas"></canvas>
+		.copyright {
+			display: block;
+			margin-top: 20px;
+			width: 440px;
+			text-align: center;
+			font-size: 11px;
+			color: #999;
+		}
+	</style>
+</head>
+<body>
 
-<textarea id="output" class="output" placeholder="Results"></textarea>
-<span class="desc-text">
-	* Copy &amp; paste the results text to your console for preview.
-</span>
+	<h1 class="heading">Console Artist</h1>
+	<span class="desc-title">Input image file:</span>
 
-<script src="js/zepto.min.js"></script>
-<script src="js/console-artist.js"></script>
+	<input type="file" id="file" class="image-file-input">
 
+	<span class="desc-text">
+		* Change aspect ratio of your image before load. (Chrome 50 is 3:16)
+	</span>
+
+	<canvas id="canvas" class="canvas"></canvas>
+
+	<textarea id="output" class="output" placeholder="Results"></textarea>
+	<span class="desc-text">
+		* Copy &amp; paste the results text to your console for preview.
+	</span>
+
+	<span class="copyright">
+		© <a href="https://knt5.github.io/" target="_blank">knt5</a>
+	</span>
+
+	<script src="js/zepto.min.js"></script>
+	<script src="js/console-artist.js"></script>
+
+</body>
 </html>
