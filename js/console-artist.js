@@ -20,13 +20,16 @@
 		// Delete message
 		$message.text('');
 		
-		// Start to read file
+		// Get files
 		var files = event.target.files;
-		var reader = new FileReader();
-		reader.readAsDataURL(files[0]);
-		
-		// Register FileReader onload handler
-		reader.onload = onLoadFile;
+		if(files.length > 0) {
+			// Start to read file
+			var reader = new FileReader();
+			reader.readAsDataURL(files[0]);
+			
+			// Register FileReader onload handler
+			reader.onload = onLoadFile;
+		}
 	});
 	
 	//=================================================================
