@@ -77,6 +77,10 @@
 			// Clear canvas
 			context.clearRect(0, 0, width, height);
 			
+			// Fill canvas with white
+			context.fillStyle = "#fff";
+			context.fillRect(0, 0, width, height);
+			
 			// Draw image
 			if(isLargeImage) {
 				context.drawImage(image, 0, 0, image.width, image.height, 0, 0, width, height);
