@@ -12,7 +12,7 @@
 	// Constant
 	var maxImageSize = 20000;
 	var reducedImageWidth = 120;
-	var reducedImageRatio = 3 / 16;
+	var reducedImageRatio = 7 / 16;
 	
 	//=================================================================
 	// On change file
@@ -163,7 +163,7 @@
 					consoleText += '%c';
 					prevColorCode = colorCode;
 				}
-				consoleText += '　';
+				consoleText += ' ';
 			}
 			consoleText += '\\n';
 		}
