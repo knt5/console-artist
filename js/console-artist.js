@@ -61,7 +61,7 @@
 				
 				// Calculate reduced image size
 				width = reducedImageWidth;
-				height = reducedImageWidth / image.width * reducedImageRatio * image.height;
+				height = parseInt(reducedImageWidth / image.width * reducedImageRatio * image.height);
 				
 			} else {
 				width = image.width;
