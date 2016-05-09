@@ -1,56 +1,102 @@
 (function() {
 	
 	// DOM
-	var $canvas = $('#canvas');
-	var $output = $('#output');
-	var $file   = $('#file');
+	var $canvas  = $('#canvas');
+	var $output  = $('#output');
+	var $file    = $('#file');
+	var $message = $('#message')
 	
-	// Canvas
+	// Canvas context
 	var context = $canvas.get(0).getContext('2d');
 	
-	//======================================================
-	// EventHandler: on change file
+	// Constant
+	var maxImageSize = 20000;
+	var reducedImageWidth = 120;
+	var reducedImageRatio = 3 / 16;
+	
+	//=================================================================
+	// On change file
 	$file.change(function(event) {
-		var file = event.target.files;
+		// Delete message
+		$message.text('');
+		
+		// Start to read file
+		var files = event.target.files;
 		var reader = new FileReader();
-		reader.readAsDataURL(file[0]);
+		reader.readAsDataURL(files[0]);
+		
+		// Register FileReader onload handler
 		reader.onload = onLoadFile;
 	});
 	
-	//======================================================
-	// EventHandler: on load file
+	//=================================================================
+	// On load file
 	function onLoadFile(event) {
+		// Get file reader
 		var reader = event.target;
+		
+		// Create image
 		var image = new Image();
+		
+		// Set image source
 		image.src = reader.result;
+		
+		// Register Image onload handler
 		image.onload = function() {
-			// set size
-			$canvas.width(image.width);
-			$canvas.height(image.height);
-			$canvas.prop('width', image.width);
-			$canvas.prop('height', image.height);
+			var width = 0;
+			var height = 0;
 			
-			// clear
-			context.clearRect(0, 0, image.width, image.height);
+			// Check image size
+			var size = image.width * image.height;
+			var isLargeImage = false;
+			if(size > maxImageSize) {
+				isLargeImage = true;
+			}
+			if(isLargeImage) {
+				// Alert
+				$message.text('Image is too large, reduced size and changed aspect ratio.');
+				
+				// Calculate reduced image size
+				width = reducedImageWidth;
+				height = reducedImageWidth / image.width * reducedImageRatio * image.height;
+				
+			} else {
+				width = image.width;
+				height = image.height;
+			}
 			
-			// draw
-			context.drawImage(image, 0, 0);
+			// Set canvas size
+			$canvas.width(width);
+			$canvas.height(height);
+			$canvas.prop('width', width);
+			$canvas.prop('height', height);
 			
-			// generate art code
-			createArt(image);
+			// Clear canvas
+			context.clearRect(0, 0, width, height);
+			
+			// Draw image
+			if(isLargeImage) {
+				context.drawImage(image, 0, 0, image.width, image.height, 0, 0, width, height);
+			} else {
+				context.drawImage(image, 0, 0);
+			}
+			
+			// Generate art code
+			createArt(context.getImageData(0, 0, width, height));
 		};
 	}
 	
-	//======================================================
-	// convert color format
+	//=================================================================
+	// Convert color format
 	function hex(r, g, b) {
 		return ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
 	}
 	
-	//======================================================
+	//=================================================================
 	// Generate art code
-	function createArt(image) {
-		var imageData = context.getImageData(0, 0, image.width, image.height);
+	function createArt(imageData) {
+		var width = imageData.width;
+		var height = imageData.height;
 		var r, g, b, x, y;
 		var colorCode, prevColorCode = '';
 		var css = [];
@@ -60,12 +106,12 @@
 		var art = '';
 		
 		//-------------------------------------------
-		// generate color list
-		for(y = 0; y < image.height; y++) {
-			for(x = 0; x < image.width; x++) {
-				r = imageData.data[x * 4 + y * image.width * 4];
-				g = imageData.data[x * 4 + y * image.width * 4 + 1];
-				b = imageData.data[x * 4 + y * image.width * 4 + 2];
+		// Generate color list
+		for(y = 0; y < height; y++) {
+			for(x = 0; x < width; x++) {
+				r = imageData.data[x * 4 + y * width * 4];
+				g = imageData.data[x * 4 + y * width * 4 + 1];
+				b = imageData.data[x * 4 + y * width * 4 + 2];
 				colorCode = hex(r, g, b);
 				
 				if(colorIndexes[colorCode] === undefined) {
@@ -82,11 +128,12 @@
 		}
 		
 		//-------------------------------------------
-		// code start
+		// Generate code
+		
+		// Begin
 		art += '(function(){';
 		
-		//-------------------------------------------
-		// code: color deifinition
+		// Color deifinition
 		art += 'var ';
 		for(colorCode in colorIndexes) {
 			index = colorIndexes[colorCode];
@@ -94,14 +141,13 @@
 		}
 		art += colorList.join(',') + ';';
 		
-		//-------------------------------------------
-		// code: main
-		for(y = 0; y < image.height; y++) {
+		// Console text
+		for(y = 0; y < height; y++) {
 			prevColorCode = '';
-			for(x = 0; x < image.width; x++) {
-				r = imageData.data[x * 4 + y * image.width * 4];
-				g = imageData.data[x * 4 + y * image.width * 4 + 1];
-				b = imageData.data[x * 4 + y * image.width * 4 + 2];
+			for(x = 0; x < width; x++) {
+				r = imageData.data[x * 4 + y * width * 4];
+				g = imageData.data[x * 4 + y * width * 4 + 1];
+				b = imageData.data[x * 4 + y * width * 4 + 2];
 				colorCode = hex(r, g, b);
 				
 				index = colorIndexes[colorCode];
@@ -117,23 +163,20 @@
 		art += "console.log('" + consoleText + "',";
 		art += cList.join(',') + ');\n';
 		
-		//-------------------------------------------
-		// message
+		// Message
 		art += "return '';";
 		
-		//-------------------------------------------
-		// code end
+		// End
 		art += '})();\n';
 		
 		//-------------------------------------------
-		// output
+		// Output
 		$output.text(art);
 		
-		//-------------------------------------------
-		// output to console
+		// Output to console
 		eval(art);
 	}
 	
-	//======================================================
+	//=================================================================
 	return {};
 })();

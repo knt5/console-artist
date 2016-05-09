@@ -61,9 +61,11 @@
 
 		.desc-text {
 			display: block;
+			width: 440px;
 			margin-top: 5px;
 			font-size: 11px;
 			text-shadow: none;
+			line-height: 1.4;
 		}
 
 		.canvas {
@@ -90,17 +92,26 @@
 			font-size: 11px;
 			color: #999;
 		}
+
+		.warning {
+			color: #f00;
+		}
 	</style>
 </head>
 <body>
 
 	<h1 class="heading">Console Artist</h1>
+
 	<span class="desc-title">Input image file:</span>
 
 	<input type="file" id="file" class="image-file-input">
 
 	<span class="desc-text">
-		* Change aspect ratio of your image before load. (Chrome 50 is 3:16)
+		* Change aspect ratio of image before load. (Chrome 50 / 16:3)<br>
+		* Max number of pixels of image to load is 20000. (e.g. 400x50)
+	</span>
+
+	<span id="message" class="warning desc-text">
 	</span>
 
 	<canvas id="canvas" class="canvas"></canvas>
